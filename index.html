@@ -18,16 +18,21 @@
         #question-section, #success-message { display: none; }
         #start-section { display: block; }
         
-        /* Style pour le GIF du Panda (Recadrage automatique) */
-        .panda-gif { 
-            width: 150px; 
-            height: 150px; 
-            object-fit: cover; /* C'est ça qui "recadre" pour centrer sur le panda */
-            border-radius: 50%; /* Optionnel : met le panda dans un cercle mignon */
-            margin-bottom: 10px;
+        /* Style pour ton nouveau GIF stressé */
+        .stress-gif { 
+            width: 180px; 
+            height: auto; 
+            border-radius: 15px;
+            margin-bottom: 15px;
         }
 
-        .stitch-gif { width: 80%; max-width: 300px; border-radius: 15px; margin-top: 20px; }
+        /* Style pour ton GIF de fin (celui sur ton GitHub) */
+        .final-gif { 
+            width: 80%; 
+            max-width: 300px; 
+            border-radius: 15px; 
+            margin-top: 20px; 
+        }
     </style>
 </head>
 <body>
@@ -38,14 +43,14 @@
 
     <div class="card">
         <div id="start-section">
-            <h1>Coucou ! </h1>
+            <h1>Coucou mon coeur !</h1>
             <p>J'ai un petit truc à te demander...</p>
-            <button id="start-btn">cliqueeee !!!!!</button>
+            <button id="start-btn">cliqueee !!!!</button>
         </div>
 
         <div id="question-section">
-            <img src="https://media.tenor.com/S678uP-InS8AAAAC/mochi-peach-cat-cat.gif" class="panda-gif">
-            <h1>Veux-tu être mon valentin ?</h1>
+            <img src="https://i.pinimg.com/originals/f0/1a/e5/f01ae55a25f8c135d9ddcacb46d0d8e4.gif" class="stress-gif">
+            <h1>Veux-tu être mon valentin ? ^^</h1>
             <div class="buttons">
                 <button id="yes-btn">OUI !</button>
                 <button id="no-btn">Non</button>
@@ -55,7 +60,7 @@
         <div id="success-message">
             <h1>Je le savais ! Je t'aime !♥ </h1>
             <p>On se voit le 14 ? :p </p>
-            <img src="https://i.pinimg.com/originals/91/55/f0/9155f038cab02a40ccba7e5a4436d9d4.gif" class="stitch-gif">
+            <img src="final.gif" class="final-gif">
         </div>
     </div>
 
