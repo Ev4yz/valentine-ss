@@ -8,16 +8,21 @@
         body { background-color: #ffebee; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Arial', sans-serif; overflow: hidden; text-align: center; margin: 0; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 85%; max-width: 400px; }
         h1 { color: #d32f2f; }
-        .buttons { margin-top: 20px; }
+        .buttons { 
+            margin-top: 20px; 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; /* Cela les garde côte à côte */
+            min-height: 50px; 
+        }
         button { padding: 10px 25px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; font-weight: bold; }
         
-        /* Bouton de démarrage */
         #start-btn { background-color: #d32f2f; color: white; padding: 15px 30px; }
+        #yes-btn { background-color: #4caf50; color: white; }
         
-        #yes-btn { background-color: #4caf50; color: white; margin-right: 10px; }
-        #no-btn { background-color: #f44336; color: white; position: relative; }
+        /* Le bouton NON est normal au début */
+        #no-btn { background-color: #f44336; color: white; position: relative; z-index: 1000; }
         
-        /* Cacher les sections au début */
         #question-section, #success-message { display: none; }
         #start-section { display: block; }
         
@@ -32,7 +37,7 @@
 
     <div class="card">
         <div id="start-section">
-            <h1>Coucou ! </h1>
+            <h1>Coucou ! ✨</h1>
             <p>J'ai un petit truc à te demander...</p>
             <button id="start-btn">Clique ici</button>
         </div>
@@ -62,30 +67,33 @@
         const questionSection = document.getElementById('question-section');
         const successMessage = document.getElementById('success-message');
 
-        // Quand il clique sur le premier bouton
         startBtn.addEventListener('click', () => {
-            audio.play(); // Lance la musique
+            audio.play();
             startSection.style.display = 'none';
             questionSection.style.display = 'block';
         });
 
-        // Quand il clique sur OUI
         yesBtn.addEventListener('click', () => {
             questionSection.style.display = 'none';
             successMessage.style.display = 'block';
         });
 
-        // Quand il survole NON
         const moveButton = () => {
+            // On change la position en 'fixed' seulement quand on essaie de cliquer
+            noBtn.style.position = 'fixed'; 
+            
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.position = 'fixed';
+            
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         };
 
         noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('touchstart', moveButton); // Pour que ça marche sur téléphone !
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Empêche le clic accidentel sur mobile
+            moveButton();
+        });
     </script>
 </body>
 </html>
