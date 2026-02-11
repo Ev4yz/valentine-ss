@@ -5,20 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Une petite question...</title>
     <style>
-        body { background-color: #ffebee; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Arial', sans-serif; overflow: hidden; text-align: center; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        body { background-color: #ffebee; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Arial', sans-serif; overflow: hidden; text-align: center; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 85%; max-width: 400px; }
         h1 { color: #d32f2f; }
         .buttons { margin-top: 20px; }
-        button { padding: 10px 25px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        button { padding: 10px 25px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        
+        /* Bouton de démarrage */
+        #start-btn { background-color: #d32f2f; color: white; padding: 15px 30px; }
+        
         #yes-btn { background-color: #4caf50; color: white; margin-right: 10px; }
         #no-btn { background-color: #f44336; color: white; position: relative; }
-        #success-message { display: none; }
+        
+        /* Cacher les sections au début */
+        #question-section, #success-message { display: none; }
+        #start-section { display: block; }
+        
         img { max-width: 200px; margin-top: 20px; border-radius: 10px; }
     </style>
 </head>
 <body>
 
+    <audio id="myAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="card">
+        <div id="start-section">
+            <h1>Coucou ! </h1>
+            <p>J'ai un petit truc à te demander...</p>
+            <button id="start-btn">Clique ici</button>
+        </div>
+
         <div id="question-section">
             <h1>Veux-tu être mon valentin ?</h1>
             <div class="buttons">
@@ -35,23 +53,39 @@
     </div>
 
     <script>
+        const startBtn = document.getElementById('start-btn');
         const yesBtn = document.getElementById('yes-btn');
         const noBtn = document.getElementById('no-btn');
+        const audio = document.getElementById('myAudio');
+        
+        const startSection = document.getElementById('start-section');
         const questionSection = document.getElementById('question-section');
         const successMessage = document.getElementById('success-message');
 
+        // Quand il clique sur le premier bouton
+        startBtn.addEventListener('click', () => {
+            audio.play(); // Lance la musique
+            startSection.style.display = 'none';
+            questionSection.style.display = 'block';
+        });
+
+        // Quand il clique sur OUI
         yesBtn.addEventListener('click', () => {
             questionSection.style.display = 'none';
             successMessage.style.display = 'block';
         });
 
-        noBtn.addEventListener('mouseover', () => {
+        // Quand il survole NON
+        const moveButton = () => {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
-        });
+        };
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton); // Pour que ça marche sur téléphone !
     </script>
 </body>
 </html>
