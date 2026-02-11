@@ -7,26 +7,27 @@
     <style>
         body { background-color: #ffebee; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Arial', sans-serif; overflow: hidden; text-align: center; margin: 0; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 85%; max-width: 400px; }
-        h1 { color: #d32f2f; }
-        .buttons { 
-            margin-top: 20px; 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; /* Cela les garde côte à côte */
-            min-height: 50px; 
-        }
+        h1 { color: #d32f2f; font-size: 22px; }
+        .buttons { margin-top: 20px; display: flex; justify-content: center; gap: 15px; min-height: 50px; }
         button { padding: 10px 25px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; font-weight: bold; }
         
         #start-btn { background-color: #d32f2f; color: white; padding: 15px 30px; }
         #yes-btn { background-color: #4caf50; color: white; }
-        
-        /* Le bouton NON est normal au début */
         #no-btn { background-color: #f44336; color: white; position: relative; z-index: 1000; }
         
         #question-section, #success-message { display: none; }
         #start-section { display: block; }
         
-        img { max-width: 200px; margin-top: 20px; border-radius: 10px; }
+        /* Style pour le GIF du Panda (Recadrage automatique) */
+        .panda-gif { 
+            width: 150px; 
+            height: 150px; 
+            object-fit: cover; /* C'est ça qui "recadre" pour centrer sur le panda */
+            border-radius: 50%; /* Optionnel : met le panda dans un cercle mignon */
+            margin-bottom: 10px;
+        }
+
+        .stitch-gif { width: 80%; max-width: 300px; border-radius: 15px; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -43,6 +44,7 @@
         </div>
 
         <div id="question-section">
+            <img src="https://i.pinimg.com/originals/82/0e/01/820e014902b66f281432655487779930.gif" class="panda-gif">
             <h1>Veux-tu être mon valentin ?</h1>
             <div class="buttons">
                 <button id="yes-btn">OUI !</button>
@@ -53,7 +55,7 @@
         <div id="success-message">
             <h1>Je le savais ! Je t'aime !♥ </h1>
             <p>On se voit le 14 ? :p </p>
-            <img src="https://i.pinimg.com/originals/91/55/f0/9155f038cab02a40ccba7e5a4436d9d4.gif" style="width: 80%; max-width: 300px; border-radius: 15px;">
+            <img src="https://i.pinimg.com/originals/91/55/f0/9155f038cab02a40ccba7e5a4436d9d4.gif" class="stitch-gif">
         </div>
     </div>
 
@@ -79,19 +81,16 @@
         });
 
         const moveButton = () => {
-            // On change la position en 'fixed' seulement quand on essaie de cliquer
             noBtn.style.position = 'fixed'; 
-            
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         };
 
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Empêche le clic accidentel sur mobile
+            e.preventDefault();
             moveButton();
         });
     </script>
